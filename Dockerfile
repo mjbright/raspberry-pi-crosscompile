@@ -14,7 +14,7 @@ RUN update-locale LANG=en_US.UTF-8
 # RUN echo "deb ftp://mirror.hetzner.de/ubuntu/packages precise main restricted universe multiverse" > /etc/apt/sources.list
 
 # standard base
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q supervisor dialog net-tools lynx wget vim-tiny nano openssh-server git curl sudo
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q supervisor dialog net-tools lynx wget vim-tiny nano openssh-server git curl sudo zip
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 RUN mkdir -p /var/log/supervisor
 RUN mkdir -p /var/run/sshd
