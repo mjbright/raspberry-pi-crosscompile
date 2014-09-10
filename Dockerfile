@@ -14,10 +14,7 @@ RUN update-locale LANG=en_US.UTF-8
 # RUN echo "deb ftp://mirror.hetzner.de/ubuntu/packages precise main restricted universe multiverse" > /etc/apt/sources.list
 
 # standard base
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q supervisor dialog net-tools lynx wget vim-tiny nano openssh-server git curl sudo zip
-ADD supervisord.conf /etc/supervisor/supervisord.conf
-RUN mkdir -p /var/log/supervisor
-RUN mkdir -p /var/run/sshd
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q dialog net-tools lynx wget vim-tiny nano git curl sudo zip
 
 # build tools
 # we need to install a dummy libfuse or docker will fail
@@ -46,8 +43,8 @@ RUN cd /opt/rpi/cmake-hello-world/build; cmake -D CMAKE_TOOLCHAIN_FILE=/opt/rpi/
 # Also include sample opencv build script
 ADD build.opencv /root/build.opencv
 
-# Exposes
-EXPOSE 22
+# Volume
+VOLUME /data 
 
 # run container with supervisor
-CMD ["/usr/bin/supervisord"]
+CMD ["/bin/bash"]
