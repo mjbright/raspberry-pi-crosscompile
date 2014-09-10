@@ -14,6 +14,17 @@ scp CMakeHelloWorld pi@192.168.1.PI:/home/pi/
 ssh pi@192.168.1.PI ./CMakeHelloWorld  
 Now run the program from your PI  
 
+How use
+==============
+
+    docker pull philipz/raspberry-pi-crosscompile
+or
+
+    build.sh
+Then
+
+    docker run -ti philipz/raspberry-pi-crosscompile
+
 
 OpenCV example  
 ==============
