@@ -4,8 +4,8 @@
 # Follows this stack overflow article
 # http://stackoverflow.com/questions/19162072/installing-raspberry-pi-cross-compiler/19269715#19269715
 #
-FROM ubuntu:12.04
-MAINTAINER Michael Shamberger
+FROM ubuntu:14.04
+MAINTAINER Philipz <philipzheng@gmail.com>
 
 RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
@@ -29,6 +29,8 @@ RUN cd /tmp ; rm fuse_*.deb
 RUN cd /tmp ; echo -en '#!/bin/bash\nexit 0\n' > DEBIAN/postinst
 RUN cd /tmp ; dpkg-deb -b . /fuse.deb
 RUN cd /tmp ; dpkg -i /fuse.deb
+RUN dpkg --add-architecture i386
+RUN echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse" > /etc/apt/sources.list.d/ia32-libs-raring.list
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q cmake make ia32-libs
 
 # raspberry pi compiler tools
